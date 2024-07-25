@@ -7,7 +7,7 @@ export function renderProductList() {
         <img class="product-img" src="${product.image.thumbnail}" alt="${product.name} - ${product.category}">
         <p class="product-category">${product.category}</p>
         <h3 class="product-name">${product.name}</h3>
-        <p class="product-price">$${product.price}</p>
+        <p class="product-price">$${product.price.toFixed(2)}</p>
         <button class="product-add-to-cart-button" data-product="${product.name}">Add to Cart</button>
       </li>
     `;

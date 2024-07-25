@@ -13,3 +13,7 @@ export async function loadProducts() {
     console.error('Unexpected error. Please try again later', error);
   }
 }
+
+export function findProduct(productName) {
+  return products.find(product => product.name === productName);
+}
