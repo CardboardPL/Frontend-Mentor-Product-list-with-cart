@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
   <title>Frontend Mentor | Product list with cart</title>
-
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
     .attribution { font-size: 11px; text-align: center; }
@@ -15,60 +12,35 @@
   </style>
 </head>
 <body>
+  <main class="shop-container">
+    <h1 class="u-sr-only">Product list with cart</h1>
+    <section class="products-section">
+      <h2 class="products-category">Desserts</h2>
+      <ul class="products-list">
+        <li class="product">
+          <img class="product-img" src="./assets/images/image-waffle-desktop.jpg" alt="Product Image">
+          <p class="product-type">Waffle</p>
+          <h3 class="product-name">Waffle with Berries</h3>
+          <p class="product-price">$6.50</p>
+          <button class="product-add-to-cart-button">Add to Cart</button>
+        </li>
+      </ul>
+    </section>
+   
+    <section class="cart-section">
+      <h2 class="cart-header">Your Cart (<span class="cart-quantity"><!-- Quantity --></span>)</h2>
+      <div class="cart-content">
+        <div class="cart-empty-content">
+          <img class="cart-empty-image" src="./assets//images/illustration-empty-cart.svg" alt="" aria-hidden="true">
+          <p class="cart-empty-message">Your added items will appear here</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  Desserts
-
-  Waffle with Berries
-  Waffle
-  6.50
-  Add to Cart
-
-  Vanilla Bean Crème Brûlée
-  Crème Brûlée
-  7.00
-  Add to Cart
-
-  Macaron Mix of Five
-  Macaron
-  8.00
-  Add to Cart
-
-  Classic Tiramisu
-  Tiramisu
-  5.50
-  Add to Cart
-
-  Pistachio Baklava
-  Baklava
-  4.00
-  Add to Cart
-
-  Lemon Meringue Pie
-  Pie
-  5.00
-  Add to Cart
-
-  Red Velvet Cake
-  Cake
-  4.50
-  Add to Cart
-
-  Salted Caramel Brownie
-  Brownie
-  4.50
-  Add to Cart
-
-  Vanilla Panna Cotta
-  Panna Cotta
-  6.50
-  Add to Cart
-
-  Your Cart (<!-- Quantity -->)
-  Your added items will appear here
-
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+  <footer class="attribution">
+    Challenge by <a rel="noopener noreferrer" href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a rel="noopener noreferrer" href="https://github.com/CardboardPL">CardboardPL</a>.
+  </footer>
 </body>
 </html>
