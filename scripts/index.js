@@ -1,6 +1,8 @@
 import {loadProducts} from '../data/products.js';
-import {renderProductList} from './productList.js';
+import {renderProductSection} from './productSection.js';
+import {renderCartSection} from './cartSection.js';
 
 loadProducts().then(() => {
-  renderProductList();
-}); 
+  renderProductSection();
+  renderCartSection();
+});
