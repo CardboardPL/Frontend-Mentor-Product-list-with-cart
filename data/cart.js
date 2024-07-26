@@ -53,6 +53,10 @@ class Cart {
     this.cartList = this.cartList.filter(cartItem => cartItem.name !== productName);
     this.#saveCartList();
   }
+
+  calculateCartQuantity() {
+    return cart.cartList.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  }
 };
 
 class CartItem {
