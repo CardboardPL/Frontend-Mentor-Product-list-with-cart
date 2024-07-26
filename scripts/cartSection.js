@@ -42,7 +42,7 @@ function generateCartListHTML() {
               </p>
             </div>
             <button class="remove-cart-item-button js-remove-cart-item-button" data-product-name="${cartItem.name}">
-              <img src="../assets/images/icon-remove-item.svg" alt="Remove ${cartItem.name} from Cart">
+              <img src="./assets/images/icon-remove-item.svg" alt="Remove ${cartItem.name} from Cart">
             </button>
           </li>
         `
@@ -58,7 +58,7 @@ function generateCartListHTML() {
     </p>
 
     <p class="cart-delivery-message">
-      <img src="../assets/images/icon-carbon-neutral.svg" alt="" aria-hidden="true">
+      <img src="./assets/images/icon-carbon-neutral.svg" alt="" aria-hidden="true">
       This is a <strong>carbon neutral</strong> delivery
     </p>
 
