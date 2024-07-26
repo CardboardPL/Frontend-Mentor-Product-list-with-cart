@@ -7,7 +7,7 @@ export function renderCartSection() {
       ${cart.cartList.length ? generateCartListHTML() : 
         `
           <div class="cart-empty-content">
-            <img class="cart-empty-image" src="./assets//images/illustration-empty-cart.svg" alt="" aria-hidden="true">
+            <img class="cart-empty-image" src="./assets/images/illustration-empty-cart.svg" alt="" aria-hidden="true">
             <p class="cart-empty-message">Your added items will appear here</p>
           </div>
         `
