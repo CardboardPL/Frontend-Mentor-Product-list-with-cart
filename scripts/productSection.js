@@ -1,8 +1,37 @@
 import {products} from '../data/products.js';
 import {cart} from '../data/cart.js';
 
-export function renderProductList() {
-  let productListHTML = products.reduce((html, product) => {
+export function renderProductSection() {
+  const html = `
+    <h2 class="products-type">Desserts</h2>
+    <ul class="products-list js-products-list">
+      ${generateProductListHTML()}
+    </ul>
+  `;
+
+  document.querySelector('.js-products-section').innerHTML = html;
+  document.querySelectorAll('.js-product-add-to-cart-button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const productName = btn.parentElement.dataset.product;
+      cart.addToCart(productName);
+    });
+  });
+  document.querySelectorAll('.js-cart-item-decrement-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const productName = btn.parentElement.parentElement.dataset.product;
+      cart.decreaseCartItemQuantity(productName);
+    });
+  });
+  document.querySelectorAll('.js-cart-item-increment-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const productName = btn.parentElement.parentElement.dataset.product;
+      cart.addToCart(productName);
+    });
+  });
+}
+
+function generateProductListHTML() {
+  const productListHTML = products.reduce((html, product) => {
     html += `
       <li class="product">
         <img class="product-img" src="${product.image.thumbnail}" alt="${product.name} - ${product.category}">
@@ -27,26 +56,6 @@ export function renderProductList() {
     `;
     return html;
   }, '');
-  
-  if (!productListHTML) return;
 
-  document.querySelector('.js-products-list').innerHTML = productListHTML;
-  document.querySelectorAll('.js-product-add-to-cart-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const productName = btn.parentElement.dataset.product;
-      cart.addToCart(productName);
-    });
-  });
-  document.querySelectorAll('.js-cart-item-decrement-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const productName = btn.parentElement.parentElement.dataset.product;
-      cart.decreaseCartItemQuantity(productName);
-    });
-  });
-  document.querySelectorAll('.js-cart-item-increment-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const productName = btn.parentElement.parentElement.dataset.product;
-      cart.addToCart(productName);
-    });
-  });
+  return productListHTML;
 }
