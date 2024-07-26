@@ -8,7 +8,7 @@ class Cart {
     this.#cartListId = cartListId;
 
     const localCartList = JSON.parse(localStorage.getItem(this.#cartListId));
-    this.cartList = Array.isArray(localCartList) ? localCartList : [];
+    this.cartList = Array.isArray(localCartList) ? localCartList.map(item => new CartItem(item.name, item.quantity, item.price)) : [];
   }
 
   #saveCartList() {
@@ -29,19 +29,21 @@ class Cart {
 
       if (!product) return;
 
-      this.cartList.push(new CartItem(productName, product.price));
+      this.cartList.push(new CartItem(productName, 1, product.price));
     }
 
     this.#saveCartList();
   }
 
   decreaseCartItemQuantity(productName) {
-    const item = this.findCartItem(productName);
+    const cartItem = this.findCartItem(productName);
 
-    if (item.quantity - 1 === 0) {
+    if (!cartItem) return;
+
+    if (cartItem.quantity - 1 === 0) {
       this.removeFromCart(productName);
     } else {
-      item.decreaseItemQuantity();
+      cartItem.decreaseItemQuantity();
     }
 
     this.#saveCartList();
@@ -55,11 +57,12 @@ class Cart {
 
 class CartItem {
   name;
-  quantity = 1;
+  quantity;
   price;
 
-  constructor(name, price) {
+  constructor(name, quantity, price) {
     this.name = name;
+    this.quantity = quantity;
     this.price = price;
   }
 
