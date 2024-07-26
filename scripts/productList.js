@@ -8,7 +8,20 @@ export function renderProductList() {
         <p class="product-category">${product.category}</p>
         <h3 class="product-name">${product.name}</h3>
         <p class="product-price">$${product.price.toFixed(2)}</p>
-        <button class="product-add-to-cart-button" data-product="${product.name}">Add to Cart</button>
+        <div class="product-actions" aria-label="Product Actions" data-product="${product.name}">
+          <button class="product-add-to-cart-button">Add to Cart</button>
+          <div class="product-cart-item-actions">
+            <button class="product-cart-item-action-btn">
+              <img src="./assets/images/icon-decrement-quantity.svg" alt="Decrement Item Quantity">
+            </button>
+            
+            <span class="product-cart-quantity"></span>
+
+            <button class="product-cart-item-action-btn">
+              <img src="./assets/images/icon-increment-quantity.svg" alt="Increment Item Quantity">
+            </button>
+          </div>
+        </div>
       </li>
     `;
     return html;

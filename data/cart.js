@@ -23,13 +23,25 @@ class Cart {
     const cartItem = this.findCartItem(productName);
 
     if (cartItem) {
-      cartItem.quantity += 1;
+      cartItem.increaseItemQuantity();
     } else {
-      const productPrice = findProduct(productName).price;
+      const product = findProduct(productName);
 
-      if (!productPrice) return;
+      if (!product) return;
 
-      this.cartList.push(new CartItem(productName, productPrice));
+      this.cartList.push(new CartItem(productName, product.price));
+    }
+
+    this.#saveCartList();
+  }
+
+  decreaseCartItemQuantity(productName) {
+    const item = this.findCartItem(productName);
+
+    if (item.quantity - 1 === 0) {
+      this.removeFromCart(productName);
+    } else {
+      item.decreaseItemQuantity();
     }
 
     this.#saveCartList();
@@ -49,6 +61,14 @@ class CartItem {
   constructor(name, price) {
     this.name = name;
     this.price = price;
+  }
+
+  increaseItemQuantity() {
+    this.quantity++;
+  }
+
+  decreaseItemQuantity() {
+    this.quantity--;
   }
 }
 
