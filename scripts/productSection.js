@@ -1,5 +1,6 @@
 import {products} from '../data/products.js';
 import {cart} from '../data/cart.js';
+import {renderCartSection} from './cartSection.js';
 
 export function renderProductSection() {
   const html = `
@@ -14,18 +15,21 @@ export function renderProductSection() {
     btn.addEventListener('click', () => {
       const productName = btn.parentElement.dataset.product;
       cart.addToCart(productName);
+      renderCartSection();
     });
   });
   document.querySelectorAll('.js-cart-item-decrement-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const productName = btn.parentElement.parentElement.dataset.product;
       cart.decreaseCartItemQuantity(productName);
+      renderCartSection();
     });
   });
   document.querySelectorAll('.js-cart-item-increment-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const productName = btn.parentElement.parentElement.dataset.product;
       cart.addToCart(productName);
+      renderCartSection();
     });
   });
 }
