@@ -1,4 +1,6 @@
-import {cart} from '../data/cart.js'
+import {cart} from '../data/cart.js';
+import {formatCurrency} from './utils/money.js';
+import {renderOrderConfirmation} from './orderConfirmation.js';
 
 export function renderCartSection() {
   const cartSectionHTML = `
@@ -17,13 +19,20 @@ export function renderCartSection() {
 
   document.querySelector('.js-cart-section').innerHTML = cartSectionHTML;
 
-  document.querySelectorAll('.js-remove-cart-item-button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const productName = btn.dataset.productName;
-      cart.removeFromCart(productName);
-      renderCartSection();
+  const removeCartItemButtons = document.querySelectorAll('.js-remove-cart-item-button');
+  const confirmOrderButton = document.querySelector('.js-cart-confirm-order-button');
+
+  if (removeCartItemButtons && confirmOrderButton) {
+    removeCartItemButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const productName = btn.dataset.productName;
+        cart.removeFromCart(productName);
+        renderCartSection();
+      });
     });
-  });
+
+    confirmOrderButton.addEventListener('click', renderOrderConfirmation);
+  }
 }
 
 function generateCartListHTML() {
@@ -37,8 +46,8 @@ function generateCartListHTML() {
               <p>
                 <span class="item-quantity">${cartItem.quantity}x</span>
                 @
-                <span class="item-price">$${cartItem.price.toFixed(2)}</span>
-                <span class="item-total-price">$${(cartItem.price * cartItem.quantity).toFixed(2)}</span>
+                <span class="item-price">$${formatCurrency(cartItem.price)}</span>
+                <span class="item-total-price">$${formatCurrency(cartItem.calculateTotalItemPrice())}</span>
               </p>
             </div>
             <button class="remove-cart-item-button js-remove-cart-item-button" data-product-name="${cartItem.name}">
@@ -50,11 +59,7 @@ function generateCartListHTML() {
     </ul>
 
     <p class="cart-order-total">Order Total 
-      <span class="cart-total-price">$${
-        cart.cartList.reduce((total, cartItem) => {
-          return total + cartItem.price * cartItem.quantity;
-        }, 0).toFixed(2)
-      }</span>
+      <span class="cart-total-price">$${formatCurrency(cart.calculateTotalCartPrice())}</span>
     </p>
 
     <p class="cart-delivery-message">
@@ -62,7 +67,7 @@ function generateCartListHTML() {
       This is a <strong>carbon neutral</strong> delivery
     </p>
 
-    <button class="cart-confirm-order-button">Confirm Order</button>
+    <button class="cart-confirm-order-button js-cart-confirm-order-button">Confirm Order</button>
   `;
 
   return cartListHTML;
