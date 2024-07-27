@@ -1,0 +1,54 @@
+:root {
+  /* Colors */
+  --red: hsl(14, 86%, 42%);
+  --green: hsl(159, 69%, 38%);
+
+  --rose-50: hsl(20, 50%, 98%);
+  --rose-100: hsl(13, 31%, 94%);
+  --rose-300: hsl(14, 25%, 72%);
+  --rose-400: hsl(7, 20%, 60%);
+  --rose-500: hsl(12, 20%, 44%);
+  --rose-900: hsl(14, 65%, 9%);
+
+  /* Font Weights */
+  --font-normal: 400;
+  --font-semi-bold: 600;
+  --font-bold: 700;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 1rem;
+}
+
+body {
+  font-family: "Red Hat Text", Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  font-weight: normal;
+  letter-spacing: 0;
+  line-height: 1.5;
+}
+
+main {
+  min-height: 100vh;
+  width: 100%;
+}
+
+p, h1, h2, h3, h4, h5, h6, button {
+  font: inherit;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style-type: none;
+}
