@@ -54,8 +54,17 @@ class Cart {
     this.#saveCartList();
   }
 
+  clearCartList() {
+    this.cartList = [];
+    this.#saveCartList();
+  }
+
   calculateCartQuantity() {
-    return cart.cartList.reduce((total, cartItem) => total + cartItem.quantity, 0);
+    return this.cartList.reduce((total, cartItem) => total + cartItem.quantity, 0);
+  }
+
+  calculateTotalCartPrice() {
+    return this.cartList.reduce((total, cartItem) => total + cartItem.calculateTotalItemPrice(), 0);
   }
 };
 
@@ -76,6 +85,10 @@ class CartItem {
 
   decreaseItemQuantity() {
     this.quantity--;
+  }
+
+  calculateTotalItemPrice() {
+    return this.quantity * this.price;
   }
 }
 
