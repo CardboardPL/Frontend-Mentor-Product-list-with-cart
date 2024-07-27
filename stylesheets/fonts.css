@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "Red Hat Text";
+  src: url("../assets/fonts/static/RedHatText-Regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Red Hat Text";
+  src: url("../assets/fonts/static/RedHatText-SemiBold.ttf");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Red Hat Text";
+  src: url("../assets/fonts/static/RedHatText-Bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Red Hat Text";
+  src: url("../assets/fonts/RedHatText-Italic-VariableFont_wght.ttf");
+  font-weight: 400 700;
+  font-style: italic;
+}
