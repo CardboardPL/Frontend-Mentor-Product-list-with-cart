@@ -12,7 +12,8 @@
 .products-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 22px;
+  column-gap: 23.5px;
+  row-gap: 31px;
 }
 
 .product {
