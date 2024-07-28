@@ -1,0 +1,138 @@
+.products-section {
+  margin-right: 32px;
+}
+
+.products-type {
+  font-size: 40px;
+  font-weight: var(--font-bold);
+  color: var(--rose-900);
+  margin-bottom: 27px;
+}
+
+.products-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 22px;
+}
+
+.product {
+  position: relative;
+  max-width: 251px;
+}
+
+.product::before {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 240px;
+  border-radius: 8px;
+  transition: border 0.05s ease-in-out;
+}
+
+.product.selected::before {
+  border: 3px solid var(--red);
+}
+
+.product-img {
+  object-fit: cover;
+  height: 240px;
+  border-radius: 8px;
+  margin-bottom: 36px;
+}
+
+.product-category {
+  font-size: 14px;
+  color: var(--rose-400);
+}
+
+.product-name {
+  font-weight: var(--font-semi-bold);
+  margin: 2px 0 1px 0;
+}
+
+.product-price {
+  font-weight: var(--font-semi-bold);
+  color: var(--red);
+}
+
+.product-actions {
+  position: absolute;
+  top: 218px;
+  left: 46px;
+  background-color: hsl(0, 0%, 100%);
+  height: 44px;
+  width: 159px;
+  border: 1px solid var(--rose-400);
+  border-radius: 24px;
+  overflow: hidden;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.product.selected .product-actions {
+  background-color: var(--red);
+  border-color: var(--red);
+}
+
+.product-actions > * {
+  width: 100%;
+  height: 100%;
+}
+
+.product-add-to-cart-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 26px;
+  font-size: 15px;
+  font-weight: var(--font-semi-bold);
+  letter-spacing: -0.5454545454545454px;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.product-add-to-cart-button:hover {
+  background-color: rgb(240, 240, 240);
+}
+
+.product-add-to-cart-icon {
+  width: 22px;
+}
+
+.product-cart-item-actions {
+  font-size: 15px;
+  color: white;
+  padding: 0 12px;
+}
+
+.product-cart-item-action-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 18px;
+  width: 18px;
+  border: 1px solid white;
+  border-radius: 50%;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.product-cart-item-action-btn:hover {
+  opacity: 0.75;
+}
+
+.product-cart-item-action-btn > img {
+  width: 8px;
+}
+
+.product-cart-item-actions {
+  display: none;
+}
+
+.product.selected .product-add-to-cart-button {
+  display: none;
+}
+
+.product.selected .product-cart-item-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

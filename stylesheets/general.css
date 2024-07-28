@@ -32,15 +32,26 @@ body {
   font-weight: normal;
   letter-spacing: 0;
   line-height: 1.5;
+  color: var(--rose-900);
+  background-color: var(--rose-50);
 }
 
 main {
+  display: flex;
+  flex-direction: row;
   min-height: 100vh;
   width: 100%;
+  padding: 81px 112px;
 }
 
 p, h1, h2, h3, h4, h5, h6, button {
   font: inherit;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 img {
