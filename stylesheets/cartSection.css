@@ -1,0 +1,28 @@
+.cart-section {
+  flex: 1;
+  background-color: white;
+  height: fit-content;
+  border-radius: 12px;
+  padding: 22px 24px;
+  margin-top: 7px;
+}
+
+.cart-header {
+  font-size: 24px;
+  font-weight: var(--font-bold);
+  color: var(--red);
+  margin-bottom: 38px;
+}
+
+.cart-empty-image {
+  width: 129.25px;
+  margin: 0 auto;
+}
+
+.cart-empty-message {
+  font-size: 14px;
+  font-weight: var(--font-semi-bold);
+  color: var(--rose-400);
+  text-align: center;
+  margin: 13px 0 18px 0;
+}
