@@ -16,7 +16,7 @@ class Cart {
   }
 
   findCartItem(productName) {
-    return this.cartList.find(cartItem => cartItem.name === productName);
+    return this.cartList.find(cartItem => cartItem.name === productName) || null;
   }
 
   addToCart(productName) {
