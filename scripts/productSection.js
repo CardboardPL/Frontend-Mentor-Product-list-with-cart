@@ -3,6 +3,8 @@ import {cart} from '../data/cart.js';
 import {renderCartSection} from './cartSection.js';
 import {formatCurrency} from './utils/money.js';
 
+let currentViewType = determineViewType();
+
 export function renderProductSection() {
   const html = `
     <h2 class="products-type">Desserts</h2>
@@ -44,12 +46,15 @@ function generateProductListHTML() {
 
     html += `
       <li class="product ${isSelected ? 'selected' : ''}">
-        <img class="product-img" src="${product.image.thumbnail}" alt="${product.name} - ${product.category}">
+        <img class="product-img" src="${product.image[currentViewType]}" alt="${product.name} - ${product.category}">
         <p class="product-category">${product.category}</p>
         <h3 class="product-name">${product.name}</h3>
         <p class="product-price">$${formatCurrency(product.price)}</p>
         <div class="product-actions" aria-label="Product Actions" data-product="${product.name}">
-          <button class="product-add-to-cart-button js-product-add-to-cart-button">Add to Cart</button>
+          <button class="product-add-to-cart-button js-product-add-to-cart-button">
+            <img class="product-add-to-cart-icon" src="./assets/images/icon-add-to-cart.svg" alt="" aria-hidden="true">
+            Add to Cart
+          </button>
           <div class="product-cart-item-actions">
             <button class="product-cart-item-action-btn js-cart-item-decrement-btn">
               <img src="./assets/images/icon-decrement-quantity.svg" alt="Decrement Item Quantity">
@@ -69,3 +74,24 @@ function generateProductListHTML() {
 
   return productListHTML;
 }
+
+function determineViewType() {
+  const screenWidth = window.screen.width;
+  let viewType = 'mobile';
+
+  if (screenWidth >= 800) {
+    viewType = 'desktop';
+  } else if (screenWidth >= 600) {
+    viewType = 'tablet';
+  }
+  console.log(viewType);
+  return viewType;
+}
+
+window.addEventListener('resize', () => {
+  const viewType = determineViewType();
+  if (currentViewType !== viewType) {
+    currentViewType = viewType;
+    renderProductSection();
+  }
+});
