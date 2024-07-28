@@ -16,26 +16,42 @@ export function renderProductSection() {
   document.querySelector('.js-products-section').innerHTML = html;
   document.querySelectorAll('.js-product-add-to-cart-button').forEach(btn => {
     btn.addEventListener('click', () => {
-      const productName = btn.parentElement.dataset.product;
+      const productName = btn.closest('.product-actions').dataset.product;
       cart.addToCart(productName);
+      updateProductCartQuantityUI(
+        btn.parentElement.querySelector('.js-product-cart-quantity'),
+        productName
+      );
+      
+      btn.closest('.product').classList.add('selected');
+      
       renderCartSection();
-      renderProductSection();
     });
   });
   document.querySelectorAll('.js-cart-item-decrement-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const productName = btn.parentElement.parentElement.dataset.product;
+      const productName = btn.closest('.product-actions').dataset.product;
+
       cart.decreaseCartItemQuantity(productName);
+
+      const isSelected = determineSelectedProductState(productName);
+      
+      if (!isSelected) {
+        btn.closest('.product').classList.remove('selected');
+      } else {
+        updateProductCartQuantityUI(btn.nextElementSibling, productName);
+      }
+
       renderCartSection();
-      renderProductSection();
     });
   });
   document.querySelectorAll('.js-cart-item-increment-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const productName = btn.parentElement.parentElement.dataset.product;
+      const productName = btn.closest('.product-actions').dataset.product;
+
       cart.addToCart(productName);
+      updateProductCartQuantityUI(btn.previousElementSibling, productName);
       renderCartSection();
-      renderProductSection();
     });
   });
 }
@@ -60,7 +76,7 @@ function generateProductListHTML() {
               <img src="./assets/images/icon-decrement-quantity.svg" alt="Decrement Item Quantity">
             </button>
             
-            <span class="product-cart-quantity">${isSelected ? isSelected.quantity : ''}</span>
+            <span class="product-cart-quantity js-product-cart-quantity">${isSelected ? isSelected.quantity : ''}</span>
 
             <button class="product-cart-item-action-btn js-cart-item-increment-btn">
               <img src="./assets/images/icon-increment-quantity.svg" alt="Increment Item Quantity">
@@ -84,8 +100,16 @@ function determineViewType() {
   } else if (screenWidth >= 600) {
     viewType = 'tablet';
   }
-  console.log(viewType);
+
   return viewType;
+}
+
+function updateProductCartQuantityUI(element, productName) {
+  element.innerText = cart.findCartItem(productName).quantity;
+}
+
+function determineSelectedProductState(productName) {
+  return cart.findCartItem(productName) !== null;
 }
 
 window.addEventListener('resize', () => {
