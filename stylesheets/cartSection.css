@@ -1,28 +1,130 @@
 .cart-section {
-  flex: 1;
+  font-size: 14px;
   background-color: white;
   height: fit-content;
   border-radius: 12px;
-  padding: 22px 24px;
-  margin-top: 7px;
+  padding: 26px 24px 22px 24px;
+  margin-top: 1px;
+  width: clamp(320px, 100%, 384px);
 }
 
 .cart-header {
   font-size: 24px;
   font-weight: var(--font-bold);
   color: var(--red);
-  margin-bottom: 38px;
+  margin-bottom: 9px;
 }
+
+/* Empty Cart State */
 
 .cart-empty-image {
   width: 129.25px;
-  margin: 0 auto;
+  margin: 41px auto 13px auto;
 }
 
 .cart-empty-message {
-  font-size: 14px;
   font-weight: var(--font-semi-bold);
   color: var(--rose-400);
   text-align: center;
-  margin: 13px 0 18px 0;
+  margin: 0  0 18px 0;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--rose-100);
+  padding: 17px 1px 15.2px 0;
+}
+
+.cart-item:last-of-type {
+  padding-top: 17px;
+  padding-bottom: 23.2px;
+}
+
+.cart-item p {
+  color: var(--rose-400);
+}
+
+.cart-item-name {
+  font-weight: var(--font-semi-bold);
+  margin-bottom: 8px;
+}
+
+.cart-item-quantity {
+  font-weight: var(--font-semi-bold);
+  color: var(--red);
+  margin-right: 14px;
+}
+
+.cart-item-price {
+  margin-right: 6px;
+}
+
+.cart-item-total-price {
+  font-weight: var(--font-semi-bold);
+}
+
+.remove-cart-item-button {
+  height: 18px;
+  width: 18px;
+  padding: 3px;
+  border-radius: 50%;
+  border: 1px solid var(--rose-100);
+}
+
+.remove-cart-item-button:hover,
+.remove-cart-item-button:focus {
+  opacity: 0.75;
+}
+
+.cart-order-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+}
+
+.cart-total-price {
+  font-size: 24px;
+  font-weight: var(--font-bold);
+  padding: 22px 0;
+}
+
+.cart-delivery-message {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--rose-50);
+  padding: 14.75px 0;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.cart-delivery-message > img {
+  display: inline;
+  width: 21px;
+  margin-right: 8px;
+}
+
+.cart-delivery-message > strong {
+  margin: 0 3px;
+}
+
+.cart-confirm-order-button {
+  font-size: 16px;
+  font-weight: var(--font-semi-bold);
+  color: var(--rose-50);
+  background-color: var(--red);
+  width: 100%;
+  height: 53px;
+  border-radius: 28px;
+  margin-bottom: 2px;
+  transition: opacity 0.15s ease-in-out;
+}
+
+.cart-confirm-order-button:hover,
+.cart-confirm-order-button:focus {
+  opacity: 0.925;
 }
