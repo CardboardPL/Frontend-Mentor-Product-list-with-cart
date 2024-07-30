@@ -8,29 +8,22 @@ export function renderOrderConfirmation() {
   const orderConfirmationModal = document.querySelector('.js-order-confirmation-modal');
 
   orderConfirmationModal.innerHTML = generateOrderConfirmationHTML();
-  
   orderConfirmationModal.showModal();
-  orderConfirmationModal.removeAttribute('aria-hidden');
 
   orderConfirmationModal.querySelector('.js-confirm-order-yes').addEventListener('click', () => {
     orderConfirmationModal.innerHTML = generateOrderConfirmedHTML();
 
     cart.clearCartList();
 
-    const startNewOrderBtn = orderConfirmationModal.querySelector('.js-start-new-order-button');
-
-    if (startNewOrderBtn) {
-      startNewOrderBtn.addEventListener('click', () => {
+    orderConfirmationModal.querySelector('.js-start-new-order-button').addEventListener('click', () => {
         orderConfirmationModal.close();
         renderCartSection();
         renderProductSection();
       });
-    }
   });
 
   orderConfirmationModal.querySelector('.js-confirm-order-no').addEventListener('click', () => {
     orderConfirmationModal.close();
-    orderConfirmationModal.setAttribute('aria-hidden', true);
   });
 }
 
@@ -38,7 +31,7 @@ function generateOrderConfirmationHTML() {
   const html = `
     <h2>Are you sure with your order?</h2>
 
-    <div>
+    <div class="order-confirmation-actions">
       <button class="confirm-order-yes js-confirm-order-yes">Yes</button>
       <button class="confirm-order-no js-confirm-order-no">No</button>
     </div>
@@ -73,10 +66,10 @@ function generateOrderItemsHTML() {
     const product = findProduct(cartItem.name);
 
     const orderItemHTML = `
-      <li>
+      <li class="order-item">
         <div>
-          <img src="${product.image.thumbnail}" alt="" aria-hidden="true">
-          <p>${cartItem.name}</p>
+          <img src="${product.image.thumbnail}" alt="" aria-hidden="true" class="order-item-thumbnail">
+          <p class="order-item-name">${cartItem.name}</p>
           <p>
             <span class="order-item-quantity">${cartItem.quantity}x</span> @
             <span class="order-item-price">$${formatCurrency(cartItem.price)}</span>
