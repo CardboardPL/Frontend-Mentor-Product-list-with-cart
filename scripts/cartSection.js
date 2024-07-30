@@ -1,6 +1,7 @@
 import {cart} from '../data/cart.js';
 import {formatCurrency} from './utils/money.js';
 import {renderOrderConfirmation} from './orderConfirmation.js';
+import {determineProductAttributes, updateProductCartQuantityUI} from './productSection.js';
 
 export function renderCartSection() {
   const cartSectionHTML = `
@@ -28,6 +29,8 @@ export function renderCartSection() {
         const productName = btn.dataset.productName;
         cart.removeFromCart(productName);
         renderCartSection();
+        determineProductAttributes(productName);
+        updateProductCartQuantityUI(productName);
       });
     });
 
@@ -40,14 +43,14 @@ function generateCartListHTML() {
     <ul class="cart-list">
       ${cart.cartList.reduce((html, cartItem) => {
         return html + `
-          <li class="cart-list-item">
+          <li class="cart-item">
             <div>
-              <h3>${cartItem.name}</h3>
+              <h3 class="cart-item-name">${cartItem.name}</h3>
               <p>
-                <span class="item-quantity">${cartItem.quantity}x</span>
+                <span class="cart-item-quantity">${cartItem.quantity}x</span>
                 @
-                <span class="item-price">$${formatCurrency(cartItem.price)}</span>
-                <span class="item-total-price">$${formatCurrency(cartItem.calculateTotalItemPrice())}</span>
+                <span class="cart-item-price">$${formatCurrency(cartItem.price)}</span>
+                <span class="cart-item-total-price">$${formatCurrency(cartItem.calculateTotalItemPrice())}</span>
               </p>
             </div>
             <button class="remove-cart-item-button js-remove-cart-item-button" data-product-name="${cartItem.name}">
