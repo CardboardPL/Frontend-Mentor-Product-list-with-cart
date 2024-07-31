@@ -5,7 +5,8 @@
   border-radius: 12px;
   padding: 26px 24px 22px 24px;
   margin-top: 1px;
-  width: clamp(320px, 100%, 384px);
+  width: 100%;
+  max-width: 384px;
 }
 
 .cart-header {
@@ -130,4 +131,20 @@
 .cart-confirm-order-button:hover,
 .cart-confirm-order-button:focus {
   opacity: 0.925;
+}
+
+@media (max-width: 1300px) {
+  .cart-section {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 370px) {
+  .cart-delivery-message {
+    font-size: 14px;
+  }
+
+  .cart-delivery-message > img {
+    margin-right: 2px;
+  }
 }
