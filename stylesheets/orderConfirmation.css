@@ -2,7 +2,9 @@
   top: calc(50% - 1px);
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(320px, 100%, 592px);
+  min-width: 320px;
+  width: 100%;
+  max-width: 592px;
   padding: 40px 40px 38px 40px;
   border: none;
   border-radius: 12px;
@@ -95,7 +97,7 @@
   display: grid;
   grid-template-columns: 48px 1fr;
   column-gap: 16px;
-  row-gap: 4px;
+  row-gap: 5px;
 }
 
 .order-item-thumbnail {
@@ -104,6 +106,9 @@
 
 .order-item-name {
   font-weight: var(--font-semi-bold);
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .order-item-quantity {
@@ -117,8 +122,10 @@
 }
 
 .order-item-total-price {
-  font-size: 17px;
+  font-size: 16px;
   font-weight: var(--font-semi-bold);
+  padding-left: 8px;
+  margin-right: 1px;
 }
 
 .order-confirmed-total {
@@ -149,4 +156,22 @@
 .start-new-order-button:hover,
 .start-new-order-button:focus {
   opacity: 0.925;
+}
+
+@media (max-width: 600px) {
+  .order-confirmation-modal {
+    position: fixed;
+    top: initial;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: translate(0%, 0%);
+    padding: 40px 24px 22px 24px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .order-item-name {
+    margin-top: -1px;
+  }
 }
