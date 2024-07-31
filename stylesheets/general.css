@@ -68,3 +68,10 @@ img {
 ul {
   list-style-type: none;
 }
+
+@media (max-width: 600px) {
+  main {
+    padding: 23px 24px 24px 24px;
+    flex-direction: column;
+  }
+}
