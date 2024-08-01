@@ -85,12 +85,12 @@ function generateProductListHTML() {
 }
 
 function determineViewType() {
-  const screenWidth = window.screen.width;
+  const screenWidth = window.innerWidth;
   let viewType = 'mobile';
 
-  if (screenWidth >= 800) {
+  if (screenWidth > 700) {
     viewType = 'desktop';
-  } else if (screenWidth >= 600) {
+  } else if (screenWidth > 600) {
     viewType = 'tablet';
   }
 

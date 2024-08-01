@@ -1,4 +1,5 @@
 .products-section {
+  width: 100%;
   max-width: 800px;
   margin-right: 32px;
 }
@@ -13,6 +14,7 @@
 .products-list {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
   column-gap: 23.5px;
   row-gap: 31px;
 }
@@ -156,7 +158,7 @@
   }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 700px) {
   .product::before {
     height: 178.4px;
   }
@@ -175,6 +177,12 @@
 }
 
 @media (max-width: 600px) {
+  .products-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 450px) {
   .products-list {
     grid-template-columns: 1fr;
     row-gap: 22.8px;
