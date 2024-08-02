@@ -7,8 +7,8 @@ let currentViewType = determineViewType();
 
 export function renderProductSection() {
   const html = `
-    <h2 class="products-type">Desserts</h2>
-    <ul class="products-list js-products-list">
+    <h2 class="products__type">Desserts</h2>
+    <ul class="products__list js-products-list">
       ${generateProductListHTML()}
     </ul>
   `;
@@ -55,23 +55,23 @@ function generateProductListHTML() {
 
     html += `
       <li class="product ${cartItem ? 'selected' : ''}" data-product="${product.name}">
-        <img class="product-img" src="${product.image[currentViewType]}" alt="${product.name} - ${product.category}">
-        <p class="product-category">${product.category}</p>
-        <h3 class="product-name">${product.name}</h3>
-        <p class="product-price">$${formatCurrency(product.price)}</p>
-        <div class="product-actions" aria-label="Product Actions">
-          <button class="product-add-to-cart-button js-product-add-to-cart-button" ${cartItem ? 'disabled="true"' : ''}>
-            <img class="product-add-to-cart-icon" src="./assets/images/icon-add-to-cart.svg" alt="" aria-hidden="true">
+        <img class="product__img" src="${product.image[currentViewType]}" alt="${product.name} - ${product.category}">
+        <p class="product__category">${product.category}</p>
+        <h3 class="product__name">${product.name}</h3>
+        <p class="product__price">$${formatCurrency(product.price)}</p>
+        <div class="product__actions" aria-label="Product Actions for ${product.name}">
+          <button class="product__add-to-cart-button js-product-add-to-cart-button" ${cartItem ? 'disabled="true"' : ''}>
+            <img class="product__add-to-cart-icon" src="./assets/images/icon-add-to-cart.svg" alt="" aria-hidden="true">
             Add to Cart
           </button>
-          <div class="product-cart-item-actions">
-            <button class="product-cart-item-action-btn js-product-cart-item-action-btn js-cart-item-decrement-btn" ${!cartItem ? 'disabled' : ''}>
+          <div class="product__cart-actions">
+            <button class="product__cart-action-btn js-product-cart-item-action-btn js-cart-item-decrement-btn" ${!cartItem ? 'disabled' : ''}>
               <img src="./assets/images/icon-decrement-quantity.svg" alt="Decrement Item Quantity">
             </button>
             
-            <span class="product-cart-quantity js-product-cart-quantity">${cartItem ? cartItem.quantity : 0}</span>
+            <span class="product__cart-quantity js-product-cart-quantity">${cartItem ? cartItem.quantity : 0}</span>
 
-            <button class="product-cart-item-action-btn js-product-cart-item-action-btn js-cart-item-increment-btn" ${!cartItem ? 'disabled' : ''}>
+            <button class="product__cart-action-btn js-product-cart-item-action-btn js-cart-item-increment-btn" ${!cartItem ? 'disabled' : ''}>
               <img src="./assets/images/icon-increment-quantity.svg" alt="Increment Item Quantity">
             </button>
           </div>
@@ -97,18 +97,46 @@ function determineViewType() {
   return viewType;
 }
 
-export function determineProductAttributes(productName) {
-  const productElement = document.querySelector(`[data-product="${productName}"]`);
+export function determineProductAttributes(identifier, identifierType = 'name') {
+  if (identifierType !== 'name' && identifierType !== 'elem') {
+    console.error('Invalid identifierType');
+    return;
+  } 
+
+  let productElement = null;
+
+  if (identifierType === 'name') {
+    productElement = document.querySelector(`[data-product="${identifier}"]`);
+  } else if (identifierType === 'elem') {
+    productElement = identifier;
+  }
 
   if (!productElement) {
-    console.error(`Product: ${productName} was not found in the list`);
+    if (identifierType === 'name') {
+      console.error(`Product: ${identifier} was not found in the list`);
+    } else {
+      console.error('Element or identifier not found');
+    }
     return;
   }
 
-  productElement.classList.toggle('selected');
-  productElement.querySelector('.js-product-add-to-cart-button').toggleAttribute('disabled');
-  productElement.querySelectorAll('.js-product-cart-item-action-btn').forEach(btn => {
+  toggleProductAttributes(productElement);
+}
+
+function toggleProductAttributes(productElem) {
+  productElem.classList.toggle('selected');
+  productElem.querySelector('.js-product-add-to-cart-button').toggleAttribute('disabled');
+  productElem.querySelectorAll('.js-product-cart-item-action-btn').forEach(btn => {
     btn.toggleAttribute('disabled');
+  });
+}
+
+export function resetProductList() {
+  document.querySelectorAll('.product').forEach(productElem => {
+    if (productElem.classList.contains('selected')) {
+      determineProductAttributes(productElem, 'elem');
+      productElem.querySelector('.js-product-cart-quantity').innerText = 0;
+    }
   });
 }
 
