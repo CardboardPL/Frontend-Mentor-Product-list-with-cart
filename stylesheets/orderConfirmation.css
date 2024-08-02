@@ -1,4 +1,4 @@
-.order-confirmation-modal {
+.order-modal {
   top: calc(50% - 0.0625rem);
   left: 50%;
   transform: translate(-50%, -50%);
@@ -10,18 +10,18 @@
   border-radius: 0.75rem;
 }
 
-.order-confirmation-modal::backdrop {
+.order-modal::backdrop {
   background-color: black;
   opacity: 0.5;
 }
 
-.order-confirmation-modal h2 {
+.order-modal__header {
   font-size: 2.5rem;
   font-weight: var(--font-bold);
   color: var(--rose-900);
 }
 
-.order-confirmation-modal img {
+.order-modal img {
   width: 3rem;
   height: 3rem;
   object-fit: cover;
@@ -29,14 +29,14 @@
 
 /* Order Confirmation State */
 
-.order-confirmation-actions {
+.order-modal__confirmation {
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
   margin-top: 1.5rem;
 }
 
-.order-confirmation-actions > button {
+.order-modal__confirmation > button {
   flex: 1 1 0;
   font-weight: var(--font-semi-bold);
   background-color: white;
@@ -45,42 +45,38 @@
   border-radius: 1.75rem;
 }
 
-.order-confirmation-actions > .confirm-order-yes {
+.order-modal__confirmation > .order-modal__confirm-yes {
   color: var(--rose-50);
   background-color: var(--red);
   border-color: var(--red);
 }
 
-.confirm-order-yes:hover,
-.confirm-order-yes:focus {
+.order-modal__confirm-yes:hover,
+.order-modal__confirm-yes:focus {
   opacity: 0.925;
 }
 
-.confirm-order-no:hover,
-.confirm-order-no:focus {
+.order-modal__confirm-no:hover,
+.order-modal__confirm-no:focus {
   background-color: hsl(0, 0%, 94%);
 }
 
 /* Order Confirmed State */
 
-.order-confirmed-header {
+.order-modal__header:not(:first-child) {
   margin: 1.46875rem 0 0.4375rem 0;
 }
 
-.order-confirmed-message {
+.order-modal__message {
   color: var(--rose-400);
   margin-bottom: 1.90625rem;
 }
 
-.order-confirmed-items-wrapper {
+.order-modal__items-wrapper {
   background-color: var(--rose-50);
   padding: 0.5rem 1.5rem 1.28125rem 1.5rem;
   border-radius: 0.5rem;
   margin-bottom: 2.0625rem;
-}
-
-.order-item-thumbnail {
-  border-radius: 0.25rem;
 }
 
 .order-item {
@@ -104,18 +100,19 @@
   row-gap: 0.3125rem;
 }
 
-.order-item-thumbnail {
+.order-item__thumbnail {
+  border-radius: 0.25rem;
   grid-row: 1 / 3;
 }
 
-.order-item-name {
+.order-item__name {
   font-weight: var(--font-semi-bold);
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
 
-.order-item-quantity {
+.order-item__quantity {
   font-weight: var(--font-semi-bold);
   color: var(--red);
   margin-right: 0.4375rem;
@@ -125,14 +122,14 @@
   color: var(--rose-400);
 }
 
-.order-item-total-price {
+.order-item__total-price {
   font-size: 1rem;
   font-weight: var(--font-semi-bold);
   padding-left: 0.5rem;
   margin-right: 0.0625rem;
 }
 
-.order-confirmed-total {
+.order-modal__items-total {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -140,12 +137,12 @@
   margin-top: 1.40625rem;
 }
 
-.order-confirmed-total-price {
+.order-modal__items-total-price {
   font-size: 1.5rem;
   font-weight: var(--font-bold);
 }
 
-.start-new-order-button {
+.order-modal__start-new-order-button {
   font-size: 1rem;
   font-weight: var(--font-semi-bold);
   color: var(--rose-50);
@@ -157,13 +154,13 @@
   transition: opacity 0.15s ease-in-out;
 }
 
-.start-new-order-button:hover,
-.start-new-order-button:focus {
+.order-modal__start-new-order-button:hover,
+.order-modal__start-new-order-button:focus {
   opacity: 0.925;
 }
 
 @media (max-width: 600px) {
-  .order-confirmation-modal {
+  .order-modal {
     position: fixed;
     top: initial;
     left: 0;
@@ -175,7 +172,7 @@
     border-bottom-right-radius: 0;
   }
 
-  .order-item-name {
+  .order-item__name {
     margin-top: -0.0625rem;
   }
 }
