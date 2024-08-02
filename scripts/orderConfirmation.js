@@ -2,7 +2,7 @@ import {cart} from '../data/cart.js';
 import {formatCurrency} from './utils/money.js';
 import {renderCartSection} from './cartSection.js';
 import {findProduct} from '../data/products.js';
-import {renderProductSection} from './productSection.js';
+import {resetProductList} from './productSection.js';
 
 export function renderOrderConfirmation() {
   const orderConfirmationModal = document.querySelector('.js-order-confirmation-modal');
@@ -18,7 +18,7 @@ export function renderOrderConfirmation() {
     orderConfirmationModal.querySelector('.js-start-new-order-button').addEventListener('click', () => {
         orderConfirmationModal.close();
         renderCartSection();
-        renderProductSection();
+        resetProductList();
       });
   });
 
@@ -29,11 +29,11 @@ export function renderOrderConfirmation() {
 
 function generateOrderConfirmationHTML() {
   const html = `
-    <h2>Are you sure with your order?</h2>
+    <h2 class="order-modal__header">Are you sure with your order?</h2>
 
-    <div class="order-confirmation-actions">
-      <button class="confirm-order-yes js-confirm-order-yes">Yes</button>
-      <button class="confirm-order-no js-confirm-order-no">No</button>
+    <div class="order-modal__confirmation">
+      <button class="order-modal__confirm-yes js-confirm-order-yes">Yes</button>
+      <button class="order-modal__confirm-no js-confirm-order-no">No</button>
     </div>
   `;
 
@@ -42,20 +42,20 @@ function generateOrderConfirmationHTML() {
 
 function generateOrderConfirmedHTML() {
   const html = `
-    <img src="./assets/images/icon-order-confirmed.svg" alt="" aria-hidden="true">
-    <h2 class="order-confirmed-header">Order Confirmed</h2>
-    <p class="order-confirmed-message">We hope you enjoy your food!</p>
+    <img class="order-modal__confirmed-img" src="./assets/images/icon-order-confirmed.svg" alt="" aria-hidden="true">
+    <h2 class="order-modal__header">Order Confirmed</h2>
+    <p class="order-modal__message">We hope you enjoy your food!</p>
 
-    <div class="order-confirmed-items-wrapper">
-      <ul class="order-items-list">
+    <div class="order-modal__items-wrapper">
+      <ul class="order-modal__list">
         ${generateOrderItemsHTML()}
       </ul>
-      <p class="order-confirmed-total">Order total
-        <span class="order-confirmed-total-price">$${formatCurrency(cart.calculateTotalCartPrice())}</span>
+      <p class="order-modal__items-total">Order total
+        <span class="order-modal__items-total-price">$${formatCurrency(cart.calculateTotalCartPrice())}</span>
       </p>
     </div>
 
-    <button class="start-new-order-button js-start-new-order-button">Start new order</button>
+    <button class="order-modal__start-new-order-button js-start-new-order-button">Start new order</button>
   `;
 
   return html;
@@ -68,15 +68,15 @@ function generateOrderItemsHTML() {
     const orderItemHTML = `
       <li class="order-item">
         <div>
-          <img src="${product.image.thumbnail}" alt="" aria-hidden="true" class="order-item-thumbnail">
-          <p class="order-item-name">${cartItem.name}</p>
+          <img class="order-item__thumbnail" src="${product.image.thumbnail}" alt="" aria-hidden="true">
+          <p class="order-item__name">${cartItem.name}</p>
           <p>
-            <span class="order-item-quantity">${cartItem.quantity}x</span> @
-            <span class="order-item-price">$${formatCurrency(cartItem.price)}</span>
+            <span class="order-item__quantity">${cartItem.quantity}x</span> @
+            <span class="order-item__price">$${formatCurrency(cartItem.price)}</span>
           </p>
         </div>
 
-        <p class="order-item-total-price">$${formatCurrency(cartItem.calculateTotalItemPrice())}</p>
+        <p class="order-item__total-price">$${formatCurrency(cartItem.calculateTotalItemPrice())}</p>
       </li>
     `
 
